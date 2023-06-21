@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
+
+const API_URL = "http://www.omdbapi.com?apikey=c032e2d7";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const searchMovies = async (title) => {
+    const respone = await fetch(`${API_URL}&s=${title}`);
+    const data = await respone.json();
+    console.log(data.Search)
+  };
+
+  useEffect(() => {
+    searchMovies("titanic");
+  }, []);
+  return <h1>app</h1>;
 }
 
 export default App;
